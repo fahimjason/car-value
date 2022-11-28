@@ -8,7 +8,11 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { plainToInstance } from 'class-transformer';
 
-export function Serialize(dto: any) {
+interface ClassConstructor {
+    new(...args: any[]): {}
+}
+
+export function Serialize(dto: ClassConstructor) {
     return UseInterceptors(new SerializeInterceptors(dto));
 }
 export class SerializeInterceptors implements NestInterceptor {
