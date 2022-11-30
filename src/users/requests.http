@@ -16,7 +16,7 @@ Content-Type: application/json
     "password": "user5"
 }
 
-### Signin an existing user
+### Signout
 POST http://localhost:3000/auth/signout
 
 ### Get the currently signed in user
