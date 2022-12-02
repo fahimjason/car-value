@@ -1,14 +1,16 @@
 import { Test } from '@nestjs/testing';
+import { BadRequestException } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { UsersService } from './users.service';
 import { User } from './user.entity';
 
 describe('AuthService', () => {
     let service: AuthService;
+    let fakeUserService: Partial<UsersService>
 
     beforeEach(async () => {
         // Create a fake copy of user service
-        const fakeUserService: Partial<UsersService> = {
+        fakeUserService = {
             find: () => Promise.resolve([]),
             create: (email: string, password: string) => Promise.resolve({ id: 1, email, password } as User)
         }
@@ -39,5 +41,11 @@ describe('AuthService', () => {
 
         expect(salt).toBeDefined();
         expect(hash).toBeDefined();
-    })
-})
+    });
+
+    it('throws an error if signs up with the email that is in used', async () => {
+        fakeUserService.find = async () => Promise.resolve([{ id: 1, email: 'abc@gmail.com', password: 'abc' } as User]);
+
+        await expect(service.signup('user@gmail.com', 'user')).rejects.toThrow(BadRequestException);
+    });
+});
