@@ -1,5 +1,5 @@
 import { Test } from '@nestjs/testing';
-import { BadRequestException } from '@nestjs/common';
+import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { UsersService } from './users.service';
 import { User } from './user.entity';
@@ -47,5 +47,9 @@ describe('AuthService', () => {
         fakeUserService.find = async () => Promise.resolve([{ id: 1, email: 'abc@gmail.com', password: 'abc' } as User]);
 
         await expect(service.signup('user@gmail.com', 'user')).rejects.toThrow(BadRequestException);
+    });
+
+    it('throws if signin is called with an unused email', async () => {
+        await expect(service.signin('user@gmail.com', 'user')).rejects.toThrow(NotFoundException);
     });
 });
