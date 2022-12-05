@@ -2,7 +2,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
-import exp from 'constants';
 
 describe('Authentication System (e2e)', () => {
     let app: INestApplication;
@@ -17,7 +16,7 @@ describe('Authentication System (e2e)', () => {
     });
 
     it('handles a signup request', () => {
-        const email = 'user@gmail.com';
+        const email = 'user22@gmail.com';
 
         return request(app.getHttpServer())
             .post('/auth/signup')
