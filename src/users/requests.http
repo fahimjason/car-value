@@ -3,8 +3,8 @@ POST http://localhost:3000/auth/signup
 Content-Type: application/json
 
 {
-    "email": "user7@gmail.com",
-    "password": "user7"
+    "email": "user@gmail.com",
+    "password": "user"
 }
 
 ### Signin an existing user
@@ -12,8 +12,8 @@ POST http://localhost:3000/auth/signin
 Content-Type: application/json
 
 {
-    "email": "user5@gmail.com",
-    "password": "user5"
+    "email": "user@gmail.com",
+    "password": "user"
 }
 
 ### Signout
