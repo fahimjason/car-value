@@ -29,11 +29,6 @@ export class UsersController {
         private authService: AuthService
     ) { }
 
-    // @Get('/whoami')
-    // whoAmI(@Session() session: any) {
-    //     return this.userService.findOne(session.userId);
-    // }
-
     @Get('/whoami')
     @UseGuards(AuthGuard)
     WhoAmI(@CurrentUser() user: User) {
